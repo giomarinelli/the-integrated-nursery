@@ -11,6 +11,8 @@ public class Plant {
     String genusSpecies;
     String commonName;
     LocalDate dateIntroduced;
+    public static HashMap<Integer, Zone> zones = new HashMap<Integer, Zone>();
+
 
     enum plantGroup {
         ANGIOSPERMS,
@@ -19,25 +21,35 @@ public class Plant {
         BRYOPHTES
     }
 
+    private static Plant mostExperiencedPlant;
+    private static Plant leastExperiencedPlant;
 
-    private static final PlantComparator plantComparator = new PlantComparator();
-    
-
-    
-    public static Predicate<Plant> mostExperienced() 
-    {
-        return plant -> plant.equals(Collections.max(plantList, plantComparator));
+    public static HashMap<String, Predicate<Plant>> evaluators;
+    static {
+        evaluators = new HashMap<>();
+        evaluators.put("most_experienced", plant -> plant == mostExperiencedPlant);
+        evaluators.put("least_experienced", plant -> plant == leastExperiencedPlant);
     }
 
-    
-    public static Predicate<Plant> leastExperienced() {
-        return plant -> plant.equals(Collections.min(plantList, plantComparator));
+    public Plant(String commonName, LocalDate dateIntroduced) {
+        this.commonName = commonName;
+        this.dateIntroduced = dateIntroduced;
+
+        experienceCheck();
     }
 
-
-
-
-    public static HashMap<Integer, Zone> zones = new HashMap<Integer, Zone>();
+    /*
+     * Checks and sets if current Plant is most or least experienced Plant
+     */
+    public void experienceCheck(){            
+        // Update most and least experienced plants based on the earliest dateIntroduced
+            if (mostExperiencedPlant == null || dateIntroduced.compareTo(mostExperiencedPlant.dateIntroduced) < 0) {
+                mostExperiencedPlant = this;
+            }
+            if (leastExperiencedPlant == null || dateIntroduced.compareTo(leastExperiencedPlant.dateIntroduced) > 0) {
+                leastExperiencedPlant = this;
+            }
+        }
 
     public long getId() {
         return this.id;
@@ -69,6 +81,7 @@ public class Plant {
 
     public void setDateIntroduced(LocalDate dateIntroduced) {
         this.dateIntroduced = dateIntroduced;
+        experienceCheck();
     }
 
     public HashMap<Integer, Zone> getZones() {
