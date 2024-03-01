@@ -23,7 +23,7 @@ public class Plant {
         BRYOPHTES
     }
     
-    ArrayList<Zone> zones;
+    ArrayList<Integer> zoneNumbers;
     
     private static Plant mostExperiencedPlant;
     private static Plant leastExperiencedPlant;
@@ -107,13 +107,13 @@ public class Plant {
         experienceCheck(this);
     }
 
-    public HashMap<Integer, Zone> getZones() {
-        return zones;
+    public ArrayList<Integer> getZoneNumbers() {
+        return zoneNumbers;
     }
 
-    public void setZones(HashMap<Integer, Zone> zones) {
-        this.zones = zones;
-      }
+    public void setZones(ArrayList<Integer> zones) {
+        this.zoneNumbers = zones;
+    }
 
     @Override
     public String toString() {
