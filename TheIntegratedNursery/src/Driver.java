@@ -5,14 +5,18 @@ import java.util.function.Predicate;
 
 public class Driver {
 
+    Private static ArrayList<Plant> plantList = new ArrayList<Plant>();
+    Private static Strning refiner;
+    
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-         ArrayList<Plant> plantList = new ArrayList<Plant>();
 
          //populatePlantList(); see commented out method below
+
+         setRefiners();
          makePlant(sc);
-         System.out.println(plantList);
+         printPlantList();
        
         
         sc.close();     
@@ -28,6 +32,25 @@ public class Driver {
 
     }
     */
+
+    /**
+    * Sets refiners for evaluating nursery experience with plants.  
+    *
+    * @param sc The Scanner object for user input.
+    */
+    private static void setRefiners(Scanner sc){
+        System.out.println("What zone are you currently in?");
+        //TODO: Add functionality lol
+        
+        boolean refinerAccepted = false;
+        while(!refinerAccepted){
+            System.out.println("How should we evaluate nursery experience with plant?  [Enter 'least' or 'most']");
+            refiner = sc.nextLine();
+            if (refiner.equals("most") || refiner.equals("least")){
+                refinerAccepted = true;
+            }
+        }
+    }
 
     
     /*
@@ -50,6 +73,21 @@ public class Driver {
         System.out.println("Enter the date when the plant was first introduced [YYYY-MM-DD]");
         LocalDate date = LocalDate.parse(sc.nextLine());
         return new Plant(commonName, genusSpecies, date);
+
+    }
+
+    public static void printPlantList(){
+        for(Plant plant : plantList){
+            System.out.println(plant.id);
+            System.out.println(plant.toString());
+            System.out.println(plant.getClass().getSimpleName());
+            
+            System.out.print(refiner.equals("most") ? "most experience: " : "least experience: ");
+            System.out.print(evaluatePlant(plant) + "\n");
+            
+            //TODO: needs functionality
+            System.out.println("good for your zone: ")
+        }
 
     }
 
