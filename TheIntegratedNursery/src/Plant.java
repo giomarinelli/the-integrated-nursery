@@ -47,7 +47,7 @@ public class Plant {
         
         
 
-        experienceCheck();
+        experienceCheck(this);
     }
 
     //Temporary empty Plant() constructor to silence errors in Trees and Flowering classes
@@ -104,7 +104,7 @@ public class Plant {
 
     public void setDateIntroduced(LocalDate dateIntroduced) {
         this.dateIntroduced = dateIntroduced;
-        experienceCheck();
+        experienceCheck(this);
     }
 
     public HashMap<Integer, Zone> getZones() {
@@ -133,13 +133,13 @@ public class Plant {
     /*
     * Checks and sets if current Plant is most or least experienced Plant
     */
-    public void experienceCheck(){            
+    public static void experienceCheck(Plant plant){            
         // Update most and least experienced plants based on the earliest dateIntroduced
-            if (mostExperiencedPlant == null || dateIntroduced.compareTo(mostExperiencedPlant.dateIntroduced) < 0) {
-                mostExperiencedPlant = this;
+            if (mostExperiencedPlant == null || plant.dateIntroduced.compareTo(mostExperiencedPlant.dateIntroduced) < 0) {
+                mostExperiencedPlant = plant;
             }
-            if (leastExperiencedPlant == null || dateIntroduced.compareTo(leastExperiencedPlant.dateIntroduced) > 0) {
-                leastExperiencedPlant = this;
+            if (leastExperiencedPlant == null || plant.dateIntroduced.compareTo(leastExperiencedPlant.dateIntroduced) > 0) {
+                leastExperiencedPlant = plant;
             }
     }
     
