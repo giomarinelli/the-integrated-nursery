@@ -24,7 +24,7 @@ public class Driver {
     private static void populatePlantList(){
         Plant plant1 = new Plant("Supreme Leafer", "Plantimus Maximus", "2013-02-20");
         Plant plant2 = new Flowering("Pretty Boi", "Prettiest Boyicus", "2015-04-21", "bright pink", "the most beautiful bloom");
-        Plant plant3 = new Flowering("Ugly Gross Stinky Flower", "Nasticus Bloomicus", )
+        Plant plant3 = new Flowering("Ugly Gross Stinky Flower", "Nasticus Bloomicus", "2012-06-18", "slime green", "awful stench")
 
     }
     */
