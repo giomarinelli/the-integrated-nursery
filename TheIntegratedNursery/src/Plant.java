@@ -37,12 +37,14 @@ public class Plant {
     }
 
     //Constructor
+    //public Plant(String commonName, String genusSpecies, String dateIntroduced) { Droped in in case we decide to switch aporach
      public Plant(String commonName, String genusSpecies, LocalDate dateIntroduced) {
         plantsCreated++;
         this.id = plantsCreated;
         this.genusSpecies = genusSpecies;
         this.commonName = commonName;
         this.dateIntroduced = dateIntroduced;
+        //this.dateIntroduced = LocalDate.parse(dateIntroduced); Droped in in case we decide to switch aporach
         this.plantGroup = plantGroup.ANGIOSPERMS; // TODO: Figure out what to do with these plantGroup enums lol
         
         
