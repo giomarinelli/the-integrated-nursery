@@ -58,7 +58,7 @@ public class Driver {
     * @param: Scanner sc for input
     * @return: new Plant with validated fields
     */
-    private static Plant makePlant(Scanner sc)
+    private static void makePlant(Scanner sc)
     {
         
         System.out.println("Enter the common name of the plant:");
@@ -72,7 +72,8 @@ public class Driver {
 
         System.out.println("Enter the date when the plant was first introduced [YYYY-MM-DD]");
         LocalDate date = LocalDate.parse(sc.nextLine());
-        return new Plant(commonName, genusSpecies, date);
+        Plant newPlant = new Plant(commonName, genusSpecies, date);
+        plantList.add(newPlant);
 
     }
 
