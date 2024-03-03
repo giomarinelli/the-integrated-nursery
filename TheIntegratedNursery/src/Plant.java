@@ -1,14 +1,13 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.Scanner;
 import java.util.function.Predicate;
 import java.util.regex.*;
 
 public class Plant {
 
-//FIELDS
+
+    //FIELDS
     long id;
     static long plantsCreated = 0;
     String genusSpecies;
@@ -16,39 +15,35 @@ public class Plant {
     LocalDate dateIntroduced;
     plantGroup plantGroup;
     
-    enum plantGroup {
-        ANGIOSPERMS,
-        GYMNOSPERMS,
-        PTERIDOPHYTES,
-        BRYOPHTES
+     enum plantGroup {
+        ANGIOSPERM,
+        GYMNOSPERM,
+        PTERIDOPHYTE,
+        BRYOPHTE
     }
     
-    ArrayList<Integer> zoneNumbers;
+    ArrayList<Integer> zones = new ArrayList<Integer>();
     
     private static Plant mostExperiencedPlant;
     private static Plant leastExperiencedPlant;
 
-    public static HashMap<String, Predicate<Plant>> evaluators;
+    public static HashMap<String, Predicate<Plant>> evaluators = new HashMap<String, Predicate<Plant>>();;
     static {
-        evaluators = new HashMap<>();
-        //TODO: check that i didn't mess up the compareTo() method usage here
+        
         evaluators.put("most_experienced", plant -> plant.getDateIntroduced().compareTo(mostExperiencedPlant.getDateIntroduced()) == 0);
         evaluators.put("least_experienced",plant -> plant.getDateIntroduced().compareTo(leastExperiencedPlant.getDateIntroduced()) == 0);
     }
 
     //Constructor
     //public Plant(String commonName, String genusSpecies, String dateIntroduced) { Droped in in case we decide to switch aporach
-     public Plant(String commonName, String genusSpecies, LocalDate dateIntroduced) {
+    public Plant(String commonName, String genusSpecies, LocalDate dateIntroduced) {
         plantsCreated++;
         this.id = plantsCreated;
         this.genusSpecies = genusSpecies;
         this.commonName = commonName;
         this.dateIntroduced = dateIntroduced;
-        //this.dateIntroduced = LocalDate.parse(dateIntroduced); Droped in in case we decide to switch aporach
-        this.plantGroup = plantGroup.ANGIOSPERMS; // TODO: Figure out what to do with these plantGroup enums lol
+        this.plantGroup = null;        
         
-        
-
         experienceCheck(this);
     }
 
@@ -56,25 +51,6 @@ public class Plant {
     public Plant(){
     }
     
-//Old Plant comparator method (commented out for backup purposes.)   
-/**
-    private static final PlantComparator plantComparator = new PlantComparator();
-    
-
-    
-    public static Predicate<Plant> mostExperienced() 
-    {
-        return plant -> plant.equals(Collections.max(plantList, plantComparator));
-    }
-
-    
-    public static Predicate<Plant> leastExperienced() {
-        return plant -> plant.equals(Collections.min(plantList, plantComparator));
-    }
-
-*/
-
-
    
     public long getId() {
         return this.id;
@@ -109,12 +85,12 @@ public class Plant {
         experienceCheck(this);
     }
 
-    public ArrayList<Integer> getZoneNumbers() {
-        return zoneNumbers;
+    public ArrayList<Integer> getZones() {
+        return zones;
     }
 
     public void setZones(ArrayList<Integer> zones) {
-        this.zoneNumbers = zones;
+        this.zones = zones;
     }
 
     @Override
@@ -124,7 +100,7 @@ public class Plant {
     }
 
     public boolean growsInZone(int zoneNumber) {
-        if (zones.containsKey(zoneNumber))
+        if (zones.contains(zoneNumber))
             return true;
         return false;
     }
@@ -145,6 +121,17 @@ public class Plant {
             }
     }
     
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public plantGroup getPlantGroup() {
+        return this.plantGroup;
+    }
+
+    public void setPlantGroup(plantGroup plantGroup) {
+        this.plantGroup = plantGroup;
+    }
 
 
 // Matcher Declaration

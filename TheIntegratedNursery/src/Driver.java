@@ -1,38 +1,37 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.function.Predicate;
+
+
+
 
 public class Driver {
 
-    Private static ArrayList<Plant> plantList = new ArrayList<Plant>();
-    Private static Strning refiner;
+    private static ArrayList<Plant> plantList = new ArrayList<Plant>();
+    private static String refiner;
+    static int currentZone;
     
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
-
-         //populatePlantList(); see commented out method below
-
-         setRefiners();
+        
+         populatePlantList(); 
+         setRefiners(sc);
          makePlant(sc);
          printPlantList();
        
-        
         sc.close();     
     }
 
-    //method below is sample code for how we might add the pre-made plants. NOTE: the date paramters in these are passed
-    //in as strings NOT dates.
-    /* 
+    
+    
     private static void populatePlantList(){
-        Plant plant1 = new Plant("Supreme Leafer", "Plantimus Maximus", "2013-02-20");
-        Plant plant2 = new Flowering("Pretty Boi", "Prettiest Boyicus", "2015-04-21", "bright pink", "the most beautiful bloom");
-        Plant plant3 = new Flowering("Ugly Gross Stinky Flower", "Nasticus Bloomicus", "2012-06-18", "slime green", "awful stench")
+        plantList.add(new FloweringPlant("Pretty Boi", "Prettiest boyicus", LocalDate.parse("2018-03-14"), "bright pink", "the most beautiful bloom"));
+        plantList.add(new FloweringPlant("Ugly Gross Stinky Flower", "Nasticus Bloomicus", LocalDate.parse("2017-03-14"), "slime green", "awful stench"));
+        plantList.add(new Tree("Socotra dragon tree", "Dracaena cinnabari", LocalDate.parse("1999-01-01")));
+        plantList.add(new Plant("Supreme Leafer", "Plantimus maximus", LocalDate.parse("2019-03-14")));
 
     }
-    */
-
+   
     /**
     * Sets refiners for evaluating nursery experience with plants.  
     *
@@ -40,11 +39,14 @@ public class Driver {
     */
     private static void setRefiners(Scanner sc){
         System.out.println("What zone are you currently in?");
-        //TODO: Add functionality lol
+        
+        currentZone = sc.nextInt();
         
         boolean refinerAccepted = false;
-        while(!refinerAccepted){
-            System.out.println("How should we evaluate nursery experience with plant?  [Enter 'least' or 'most']");
+        System.out.println("How should we evaluate nursery experience with plant?  [Enter 'least' or 'most']");
+        while(!refinerAccepted)
+        {
+            
             refiner = sc.nextLine();
             if (refiner.equals("most") || refiner.equals("least")){
                 refinerAccepted = true;
@@ -73,21 +75,24 @@ public class Driver {
         System.out.println("Enter the date when the plant was first introduced [YYYY-MM-DD]");
         LocalDate date = LocalDate.parse(sc.nextLine());
         Plant newPlant = new Plant(commonName, genusSpecies, date);
+        newPlant.zones.add(currentZone);
         plantList.add(newPlant);
 
     }
 
     public static void printPlantList(){
         for(Plant plant : plantList){
+            System.out.println();
             System.out.println(plant.id);
             System.out.println(plant.toString());
             System.out.println(plant.getClass().getSimpleName());
+            System.out.printf("introducted on %s\n", plant.getDateIntroduced());
             
-            System.out.print(refiner.equals("most") ? "most experience: " : "least experience: ");
-            System.out.print(evaluatePlant(plant) + "\n");
+            System.out.printf(refiner.equals("most") ? 
+            "most experience: %s\n" : "least experience: %s\n", 
+            Plant.evaluators.get("most_experienced").test(plant),Plant.evaluators.get("least_experienced").test(plant) );
             
-            //TODO: needs functionality
-            System.out.println("good for your zone: ")
+            System.out.printf("good for your zone: %s\n", plant.growsInZone(currentZone));
         }
 
     }

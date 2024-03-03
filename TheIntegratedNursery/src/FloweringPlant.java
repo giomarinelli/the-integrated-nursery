@@ -1,12 +1,12 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Flowering extends Plant{
+public class FloweringPlant extends Plant{
 
     //FIELDS
 
-    ArrayList<String> colors;
-    ArrayList<String> features;
+    ArrayList<String> colors = new ArrayList<String>();
+    ArrayList<String> features = new ArrayList<String>();
 
     /**
      * CONSTRUCTOR 
@@ -22,10 +22,11 @@ public class Flowering extends Plant{
      * @param flowerColor     the color of the flowers produced by the plant.
      * @param feature         a distinctive feature of the flowering plant.
      */
-    public Flowering(String commonName, String genusSpecies, LocalDate dateIntroduced, String flowerColor, String feature){
+    public FloweringPlant(String commonName, String genusSpecies, LocalDate dateIntroduced, String flowerColor, String feature){
         super(commonName, genusSpecies, dateIntroduced);
         colors.add(flowerColor);
         features.add(feature);
+        plantGroup = plantGroup.ANGIOSPERM;
     }
 
     //GETTERS
@@ -101,4 +102,4 @@ public class Flowering extends Plant{
 }
 
 
-}
+
