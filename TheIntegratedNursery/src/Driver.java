@@ -87,6 +87,13 @@ public class Driver {
             System.out.println(plant.toString());
             System.out.println(plant.getClass().getSimpleName());
             System.out.printf("introducted on %s\n", plant.getDateIntroduced());
+
+            if(plant.getClass().getSimpleName().equals("FloweringPlant")){
+                System.out.println(((FloweringPlant) plant).getDescription());
+            }
+            if(plant.getClass().getSimpleName().equals("Tree")){
+                System.out.println(((Tree) plant).getDescription());
+            }
             
             System.out.printf(refiner.equals("most") ? 
             "most experience: %s\n" : "least experience: %s\n", 
