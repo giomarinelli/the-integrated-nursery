@@ -18,4 +18,8 @@ public class Tree extends Plant {
         this.growSpeed = growSpeed.MEDIUM;
         plantGroup = plantGroup.GYMNOSPERM;
     }
+
+    public String getDescription(){
+        return String.format("a %s growing tree", growingSpeed).toLowerCase();
+    }
 }
