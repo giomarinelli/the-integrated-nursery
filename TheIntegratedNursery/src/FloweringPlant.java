@@ -60,6 +60,9 @@ public class FloweringPlant extends Plant{
         features.add(feature);
     }
 
+    public String getDescription(){
+        return String.format("%s plant with %s colors", featuresToString(), colorsToString());
+    }
 
     /**
      * Returns a string representation of the colors associated with the flowering plant.
