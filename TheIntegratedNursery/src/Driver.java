@@ -9,7 +9,7 @@ public class Driver {
 
     private static ArrayList<Plant> plantList = new ArrayList<Plant>();
     private static String refiner;
-    static int currentZone;
+    static int currentZone = -1;
     
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -38,9 +38,13 @@ public class Driver {
     * @param sc The Scanner object for user input.
     */
     private static void setRefiners(Scanner sc){
-        System.out.println("What zone are you currently in?");
-        
-        currentZone = sc.nextInt();
+        System.out.println("What zone are you currently in?"); 
+        while(currentZone == -1){
+            int input = sc.nextInt();
+            if(input > 0 && input < 12){
+                currentZone = input;
+            }
+        }
         
         boolean refinerAccepted = false;
         System.out.println("How should we evaluate nursery experience with plant?  [Enter 'least' or 'most']");
