@@ -2,7 +2,7 @@ import java.time.LocalDate;
 
 public class Tree extends Plant {
     
-    growSpeed growSpeed;
+    growSpeed growingSpeed;
     enum growSpeed
     {
         SLOW,MEDIUM,FAST
@@ -13,9 +13,9 @@ public class Tree extends Plant {
     * @param: growSpeed enum growSpeed
     * 
     */
-    public Tree(String commonName, String genusSpecies, LocalDate dateIntroduced){
+    public Tree(String commonName, String genusSpecies, LocalDate dateIntroduced, growSpeed growSpeed){
         super(commonName, genusSpecies, dateIntroduced);
-        this.growSpeed = growSpeed.MEDIUM;
+        this.growingSpeed = growSpeed;
         plantGroup = plantGroup.GYMNOSPERM;
     }
 

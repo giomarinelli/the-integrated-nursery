@@ -27,7 +27,7 @@ public class Driver {
     private static void populatePlantList(){
         plantList.add(new FloweringPlant("Pretty Boi", "Prettiest boyicus", LocalDate.parse("2018-03-14"), "bright pink", "the most beautiful bloom"));
         plantList.add(new FloweringPlant("Ugly Gross Stinky Flower", "Nasticus Bloomicus", LocalDate.parse("2017-03-14"), "slime green", "awful stench"));
-        plantList.add(new Tree("Socotra dragon tree", "Dracaena cinnabari", LocalDate.parse("1999-01-01")));
+        plantList.add(new Tree("Socotra dragon tree", "Dracaena cinnabari", LocalDate.parse("1999-01-01"), Tree.growSpeed.SLOW));
         plantList.add(new Plant("Supreme Leafer", "Plantimus maximus", LocalDate.parse("2019-03-14")));
 
     }
