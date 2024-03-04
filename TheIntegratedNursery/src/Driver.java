@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -73,7 +74,15 @@ public class Driver {
         while (!(Plant.validateGenusSpecies(genusSpecies))) genusSpecies = sc.nextLine();
 
         System.out.println("Enter the date when the plant was first introduced [YYYY-MM-DD]");
-        LocalDate date = LocalDate.parse(sc.nextLine());
+        LocalDate date = null;
+        while (date == null) {
+            try {
+                date = LocalDate.parse(sc.nextLine());
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid Date. Please follow format [YYYY-MM-DD]");
+            }
+        
+        }
         Plant newPlant = new Plant(commonName, genusSpecies, date);
         newPlant.zones.add(currentZone);
         plantList.add(newPlant);
