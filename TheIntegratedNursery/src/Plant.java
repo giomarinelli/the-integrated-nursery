@@ -47,9 +47,6 @@ public class Plant {
         experienceCheck(this);
     }
 
-    //Temporary empty Plant() constructor to silence errors in Trees and Flowering classes
-    public Plant(){
-    }
     
    
     public long getId() {
