@@ -95,9 +95,9 @@ public class Driver {
                 System.out.println(((Tree) plant).getDescription());
             }
             
-            System.out.printf(refiner.equals("most") ? 
-            "most experience: %s\n" : "least experience: %s\n", 
-            Plant.evaluators.get("most_experienced").test(plant),Plant.evaluators.get("least_experienced").test(plant) );
+            System.out.println(refiner.equals("most") ? 
+            "most experience: " + Plant.evaluators.get("most_experienced").test(plant) :
+            "least experience: " + Plant.evaluators.get("least_experienced").test(plant) );
             
             System.out.printf("good for your zone: %s\n", plant.growsInZone(currentZone));
         }
