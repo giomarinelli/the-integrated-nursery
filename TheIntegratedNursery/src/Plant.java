@@ -14,7 +14,7 @@ public class Plant {
 
 
     long id;
-    static long plantsCreated = 0;
+    static long plantsCreated = 4901;
     String genusSpecies;
     String commonName;
     LocalDate dateIntroduced;
