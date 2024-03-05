@@ -25,6 +25,11 @@ public class Tree extends Plant {
         group = plantGroup.GYMNOSPERM;
     }
 
+    /*
+    * getDescription
+    * @param: none
+    * @return: String formatted to describe tree
+    */
     public String getDescription(){
         return String.format("a %s growing tree", growingSpeed).toLowerCase();
     }

@@ -8,10 +8,6 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.function.Predicate;
-
-
-
 
 
 public class Driver {
@@ -23,12 +19,12 @@ public class Driver {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         
+        //EXTRA CREDIT  ?
          Plant.evaluators.put("gymnosperm", p -> p.getPlantGroup() == Plant.plantGroup.GYMNOSPERM);
+
          populatePlantList(); 
          setRefiners(sc);
-         System.out.println(refiner);
          makePlant(sc);
-         System.out.println(refiner);
          printPlantList();
        
         sc.close();     
@@ -44,13 +40,13 @@ public class Driver {
 
     }
    
-    /**
-    * Sets refiners for evaluating nursery experience with plants.  
-    *
-    * @param sc The Scanner object for user input.
+    /*
+    * setRefiners - takes user input for zone and evaluator
+    * @param: Scanner sc for user input
+    * @return: void
     */
     private static void setRefiners(Scanner sc){
-        System.out.println("What zone are you currently in? [0-9]"); 
+        System.out.println("What zone are you currently in? [1-11]"); 
         int input = -1;
         while (currentZone == -1) {
             try {
@@ -59,7 +55,7 @@ public class Driver {
                 if (input > 0 && input < 12) {
                     currentZone = input;
                 } else {
-                    System.out.println("Incorrect Format. Must be a number [1-11]");
+                    System.out.println("Incorrect Format. Must be a integer [1-11]");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Incorrect Format. Please enter a valid integer.");
@@ -131,7 +127,6 @@ public class Driver {
             if(plant.getClass().getSimpleName().equals("Tree")){
                 System.out.println(((Tree) plant).getDescription());
             }
-            System.out.println(refiner);
             if (refiner.equals("most") || refiner.equals("least"))
             {
             System.out.println(refiner.equals("most") ? 
@@ -154,9 +149,6 @@ public class Driver {
 
     
 
-    // do tree / flowering plant instead
-    Predicate<Plant> isGymnosperm = plant -> plant.getPlantGroup() == Plant.plantGroup.GYMNOSPERM;
-    
     
 
     

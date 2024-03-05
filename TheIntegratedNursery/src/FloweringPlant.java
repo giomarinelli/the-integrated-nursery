@@ -65,6 +65,11 @@ public class FloweringPlant extends Plant{
         features.add(feature);
     }
 
+    /*
+    * getDescription - 
+    * @param: none
+    * @return: String formatted to describe flower
+    */
     public String getDescription(){
         return String.format("%s plant with %s colors", featuresToString(), colorsToString());
     }
