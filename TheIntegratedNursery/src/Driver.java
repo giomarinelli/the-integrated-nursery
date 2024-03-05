@@ -46,11 +46,7 @@ public class Driver {
     * @return: void
     */
     private static void setRefiners(Scanner sc){
-<<<<<<< HEAD
         System.out.println("What zone are you currently in? [1-11]"); 
-=======
-        System.out.println("What zone are you currently in?"); 
->>>>>>> 66363f5d9edaa92b26a798d2781ade36ddfef418
         int input = -1;
         while (currentZone == -1) {
             try {
