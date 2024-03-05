@@ -1,10 +1,14 @@
+/*
+* Zone.java
+* @author Gio Marinelli, Ryan Jones
+* @version  2024-03-04
+*/
 import java.util.HashMap;
 
 public class Zone {
 
-    @SuppressWarnings("unused")
+    
     private int minTemp;
-    @SuppressWarnings("unused")
     private int maxTemp;
 
     private static HashMap<Integer, Zone> zones;

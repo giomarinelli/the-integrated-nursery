@@ -1,7 +1,15 @@
+/*
+* Driver.java
+* @author Gio Marinelli, Ryan Jones
+* @version  2024-03-04
+*/
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.function.Predicate;
+
 
 
 
@@ -15,9 +23,12 @@ public class Driver {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         
+         Plant.evaluators.put("gymnosperm", p -> p.getPlantGroup() == Plant.plantGroup.GYMNOSPERM);
          populatePlantList(); 
          setRefiners(sc);
+         System.out.println(refiner);
          makePlant(sc);
+         System.out.println(refiner);
          printPlantList();
        
         sc.close();     
@@ -39,25 +50,38 @@ public class Driver {
     * @param sc The Scanner object for user input.
     */
     private static void setRefiners(Scanner sc){
-        System.out.println("What zone are you currently in?"); 
-        while(currentZone == -1){
-            int input = sc.nextInt();
-            if(input > 0 && input < 12){
-                currentZone = input;
+        System.out.println("What zone are you currently in? [0-9]"); 
+        int input = -1;
+        while (currentZone == -1) {
+            try {
+                input = sc.nextInt();
+
+                if (input > 0 && input < 12) {
+                    currentZone = input;
+                } else {
+                    System.out.println("Incorrect Format. Must be a number [1-11]");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Incorrect Format. Please enter a valid integer.");
+                
+                sc.nextLine();
             }
         }
         
         boolean refinerAccepted = false;
-        System.out.println("How should we evaluate nursery experience with plant?  [Enter 'least' or 'most']");
+        System.out.println("How should we evaluate nursery experience with plant?  [Enter 'least', 'most' or a custom evaluator]");
         while(!refinerAccepted)
         {
             
             refiner = sc.nextLine();
-            if (refiner.equals("most") || refiner.equals("least")){
+            if (Plant.evaluators.containsKey(refiner))
+            {
                 refinerAccepted = true;
             }
+            
+            }
         }
-    }
+    
 
     
     /*
@@ -107,16 +131,33 @@ public class Driver {
             if(plant.getClass().getSimpleName().equals("Tree")){
                 System.out.println(((Tree) plant).getDescription());
             }
-            
+            System.out.println(refiner);
+            if (refiner.equals("most") || refiner.equals("least"))
+            {
             System.out.println(refiner.equals("most") ? 
-            "most experience: " + Plant.evaluators.get("most_experienced").test(plant) :
-            "least experience: " + Plant.evaluators.get("least_experienced").test(plant) );
+            "most experience: " + Plant.evaluators.get("most").test(plant) :
+            "least experience: " + Plant.evaluators.get("least").test(plant) );
+            }
+
+            if (refiner.equals("gymnosperm"))
+            {
+                
+                System.out.printf("Is a gymnosperm?: %s\n", Plant.evaluators.get("gymnosperm").test(plant) );
+            }
+            
             
             System.out.printf("good for your zone: %s\n", plant.growsInZone(currentZone));
+            Plant.evaluators.get("most").test(plant);
         }
 
     }
 
+    
+
+    // do tree / flowering plant instead
+    Predicate<Plant> isGymnosperm = plant -> plant.getPlantGroup() == Plant.plantGroup.GYMNOSPERM;
+    
+    
 
     
 }

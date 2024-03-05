@@ -1,3 +1,9 @@
+/*
+* Tree.java
+* @author Gio Marinelli, Ryan Jones
+* @version  2024-03-04
+*/
+
 import java.time.LocalDate;
 
 public class Tree extends Plant {
@@ -16,7 +22,7 @@ public class Tree extends Plant {
     public Tree(String commonName, String genusSpecies, LocalDate dateIntroduced, growSpeed growSpeed){
         super(commonName, genusSpecies, dateIntroduced);
         this.growingSpeed = growSpeed;
-        plantGroup = plantGroup.GYMNOSPERM;
+        group = plantGroup.GYMNOSPERM;
     }
 
     public String getDescription(){

@@ -1,3 +1,9 @@
+/*
+* Plant.java
+* @author Gio Marinelli, Ryan Jones
+* @version  2024-03-04
+*/
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,13 +13,12 @@ import java.util.regex.*;
 public class Plant {
 
 
-    //FIELDS
     long id;
     static long plantsCreated = 0;
     String genusSpecies;
     String commonName;
     LocalDate dateIntroduced;
-    plantGroup plantGroup;
+    plantGroup group;
     
      enum plantGroup {
         ANGIOSPERM,
@@ -30,25 +35,27 @@ public class Plant {
     public static HashMap<String, Predicate<Plant>> evaluators = new HashMap<String, Predicate<Plant>>();;
     static {
         
-        evaluators.put("most_experienced", plant -> plant.getDateIntroduced().compareTo(mostExperiencedPlant.getDateIntroduced()) == 0);
-        evaluators.put("least_experienced",plant -> plant.getDateIntroduced().compareTo(leastExperiencedPlant.getDateIntroduced()) == 0);
+        evaluators.put("most", plant -> plant.getDateIntroduced().compareTo(mostExperiencedPlant.getDateIntroduced()) == 0);
+        evaluators.put("least",plant -> plant.getDateIntroduced().compareTo(leastExperiencedPlant.getDateIntroduced()) == 0);
     }
 
-    //Constructor
-    //public Plant(String commonName, String genusSpecies, String dateIntroduced) { Droped in in case we decide to switch aporach
+    /*
+    * Parametric Plant Constructor
+    * @param: 
+    commonName - String of common name of plant
+    genusSpecies - String of scientific name (genus + species) of plant
+    dateIntroduced - LocalDate of date added to nursery.
+    * @return: 
+    */
     public Plant(String commonName, String genusSpecies, LocalDate dateIntroduced) {
         plantsCreated++;
         this.id = plantsCreated;
         this.genusSpecies = genusSpecies;
         this.commonName = commonName;
         this.dateIntroduced = dateIntroduced;
-        this.plantGroup = null;        
+        this.group = null;        
         
         experienceCheck(this);
-    }
-
-    //Temporary empty Plant() constructor to silence errors in Trees and Flowering classes
-    public Plant(){
     }
     
    
@@ -99,6 +106,11 @@ public class Plant {
 
     }
 
+    /*
+    * growsInZone - checks if int is within list of "thriving" zones
+    * @param: int zoneNumber to checked
+    * @return: true if is in list
+    */
     public boolean growsInZone(int zoneNumber) {
         if (zones.contains(zoneNumber))
             return true;
@@ -126,11 +138,11 @@ public class Plant {
     }
 
     public plantGroup getPlantGroup() {
-        return this.plantGroup;
+        return this.group;
     }
 
     public void setPlantGroup(plantGroup plantGroup) {
-        this.plantGroup = plantGroup;
+        this.group = plantGroup;
     }
 
 

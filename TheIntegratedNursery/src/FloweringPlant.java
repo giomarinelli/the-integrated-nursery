@@ -1,3 +1,8 @@
+/*
+* FloweringPlant.java
+* @author Gio Marinelli, Ryan Jones
+* @version  2024-03-04
+*/
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -26,7 +31,7 @@ public class FloweringPlant extends Plant{
         super(commonName, genusSpecies, dateIntroduced);
         colors.add(flowerColor);
         features.add(feature);
-        plantGroup = plantGroup.ANGIOSPERM;
+        group = plantGroup.ANGIOSPERM;
     }
 
     //GETTERS
