@@ -50,7 +50,7 @@ public class Driver {
     * @param sc The Scanner object for user input.
     */
     private static void setRefiners(Scanner sc){
-        System.out.println("What zone are you currently in? [0-9]"); 
+        System.out.println("What zone are you currently in?"); 
         int input = -1;
         while (currentZone == -1) {
             try {
